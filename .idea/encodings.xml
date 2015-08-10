@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/Gruntfile.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/app.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/controllers/footer.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/controllers/accountDetails.ctrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/controllers/accounts.ctrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/controllers/editAccount.ctrl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/services/accounts.factory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/services/bankoperations.factory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/services/categories.factory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/scripts/services/thirdParties.factory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/views/accounts/accountDetails.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/views/accounts/accounts.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/views/accounts/editAccount.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../MoneyWebClient/app/views/main.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/test/spec/controllers/accounts.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/test/spec/controllers/editAccount.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/test/spec/services/accounts.factory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../MoneyWebClient/test/spec/services/bankoperations.factory.js" charset="UTF-8" />
   </component>
 </project>

@@ -1,10 +1,7 @@
+@import controllers.Accounts.addAccount
 @(message: String)
 
 @main("Welcome to Play") {
 
-    <form action="@routes.Application.addAccount()" method="post">
-        <input type="text" name="name"/>
-        <button>Add account</button>
-    </form>
 
 }

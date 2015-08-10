@@ -3,12 +3,46 @@
 # ~~~~
 
 # Home page
-GET         /                             controllers.Application.index()
-POST        /addAccount                   controllers.Application.addAccount()
-GET         /accounts                     controllers.Application.getAccounts()
-GET         /operations/:accountId        controllers.Application.getOperations(accountId: Long)
+GET            /                                              controllers.Application.index()
+
+# Liste de comptes
+GET            /accounts                                      controllers.Accounts.getAccounts()
+
+# Accès et modifs à un compte
+POST           /accounts                                      controllers.Accounts.addAccount()
+GET            /accounts/:accountId                           controllers.Accounts.getAccount(accountId: Long)
+PUT            /accounts/:accountId                           controllers.Accounts.editAccount(accountId: Long)
+DELETE         /accounts/:accountId                           controllers.Accounts.deleteAccount(accountId: Long)
+
+# Liste d'opérations d'un compte
+GET            /bankOperations/:accountId                     controllers.BankOperations.getBankOperations(accountId: Long)
+
+# Accès et modifs d'une opération
+POST           /bankOperations/:accountId                     controllers.BankOperations.addBankOperation(accountId: Long)
+GET            /bankOperations/:accountId/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
+PUT            /bankOperations/:accountId/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
+DELETE         /bankOperations/:accountId/:operationId        controllers.BankOperations.deleteBankOperation(accountId: Long, operationId: Long)
+
+# Liste des catégories
+GET            /chargeCategories                              controllers.Categories.getChargeCategories()
+GET            /creditCategories                              controllers.Categories.getCreditCategories()
+
+# Liste des tiers
+GET            /thirdParties                                  controllers.ThirdParties.getThirdParties()
+
+# Accès et modifs à un tiers
+POST           /thirdParties                                  controllers.ThirdParties.addThirdParty()
+GET            /thirdParties/:thirdPartyId                    controllers.ThirdParties.getThirdParty(thirdPartyId: Long)
+PUT            /thirdParties/:thirdPartyId                    controllers.ThirdParties.editThirdParty(thirdPartyId: Long)
+DELETE         /thirdParties/:thirdPartyId                    controllers.ThirdParties.deleteThirdParty(thirdPartyId: Long)
+
+# Preflight Cross Origins
+OPTIONS        /accounts                                      controllers.Application.onOptionsPreflight()
+OPTIONS        /bankOperations/:accountId                     controllers.Application.onOptionsPreflightWithObjects(accountId: Long)
+OPTIONS        /thirdParties                                  controllers.Application.onOptionsPreflight()
+
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                 controllers.Assets.at(path="/public", file)
+GET            /assets/*file                                  controllers.Assets.at(path="/public", file)
 
     

@@ -1,5 +1,6 @@
 package models;
 
+import com.avaje.ebean.Ebean;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -37,27 +38,31 @@ public class BankOperation extends Model {
 
   @ManyToOne
   @Constraints.Required
-  public ThirdParty payee;
+  public ThirdParty thirdParty;
 
   @Min(value = 0)
-  private Double charge;
+  public Double charge;
 
   @Min(value = 0)
-  private Double credit;
+  public Double credit;
 
   @ManyToOne
   @Constraints.Required
-  private Category category;
+  public Category category;
 
   @ManyToOne
-  private SubCategory subCategory;
+  public SubCategory subCategory;
 
   @Constraints.MaxLength(value = 500)
-  private String notes;
+  public String notes;
 
 
   public BankOperation() {
     balanceState = BalanceState.NOT_BALANCED;
+  }
+
+  public static BankOperation getById(long operationId) {
+    return Ebean.find(BankOperation.class, operationId);
   }
 
   public static List<BankOperation> getByAccountId(long accountId) {

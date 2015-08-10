@@ -6,6 +6,10 @@
 create table account (
   id                        bigint auto_increment not null,
   name                      varchar(255),
+  bank_name                 varchar(255),
+  number                    varchar(255),
+  starting_balance          double,
+  final_balance             double,
   constraint pk_account primary key (id))
 ;
 
@@ -15,7 +19,7 @@ create table bank_operation (
   bank_note_num             varchar(255),
   operation_date            datetime,
   balance_state             integer,
-  payee_id                  bigint,
+  third_party_id            bigint,
   charge                    double,
   credit                    double,
   category_id               bigint,
@@ -28,6 +32,8 @@ create table bank_operation (
 create table category (
   id                        bigint auto_increment not null,
   name                      varchar(255),
+  type                      integer,
+  constraint ck_category_type check (type in (0,1)),
   constraint pk_category primary key (id))
 ;
 
@@ -46,8 +52,8 @@ create table third_party (
 
 alter table bank_operation add constraint fk_bank_operation_account_1 foreign key (account_id) references account (id) on delete restrict on update restrict;
 create index ix_bank_operation_account_1 on bank_operation (account_id);
-alter table bank_operation add constraint fk_bank_operation_payee_2 foreign key (payee_id) references third_party (id) on delete restrict on update restrict;
-create index ix_bank_operation_payee_2 on bank_operation (payee_id);
+alter table bank_operation add constraint fk_bank_operation_thirdParty_2 foreign key (third_party_id) references third_party (id) on delete restrict on update restrict;
+create index ix_bank_operation_thirdParty_2 on bank_operation (third_party_id);
 alter table bank_operation add constraint fk_bank_operation_category_3 foreign key (category_id) references category (id) on delete restrict on update restrict;
 create index ix_bank_operation_category_3 on bank_operation (category_id);
 alter table bank_operation add constraint fk_bank_operation_subCategory_4 foreign key (sub_category_id) references sub_category (id) on delete restrict on update restrict;

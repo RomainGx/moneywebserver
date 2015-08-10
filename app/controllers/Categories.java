@@ -2,6 +2,7 @@ package controllers;
 
 import models.Account;
 import models.Category;
+import models.CategoryType;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -13,14 +14,14 @@ import java.util.List;
 
 public class Categories extends Controller {
   public static Result getChargeCategories() {
-    return getCategories(Category.Type.CHARGE);
+    return getCategories(CategoryType.CHARGE);
   }
 
   public static Result getCreditCategories() {
-    return getCategories(Category.Type.CREDIT);
+    return getCategories(CategoryType.CREDIT);
   }
 
-  private static Result getCategories(Category.Type categoryType) {
+  private static Result getCategories(CategoryType categoryType) {
     AppUtils.setHeaders(response());
 
     List<Category> categories = Category.getAll(categoryType);
@@ -39,8 +40,8 @@ public class Categories extends Controller {
 
     if (categoryId == 0) {
       try {
-        Account account = Form.form(Account.class).bindFromRequest().get();
-        account.save();
+        Category category = Form.form(Category.class).bindFromRequest().get();
+        category.save();
 
         return Results.ok(AppUtils.okJsonResponse());
       }
@@ -60,7 +61,7 @@ public class Categories extends Controller {
       Category category = Form.form(Category.class).bindFromRequest().get();
       category.save();
 
-      return Results.ok(AppUtils.okJsonResponse());
+      return Results.ok(Json.toJson(category));
     }
     catch (Exception e) {
       e.printStackTrace();
@@ -68,11 +69,11 @@ public class Categories extends Controller {
     }
   }
 
-  public static Result deleteCategory(long accountId) {
+  public static Result deleteCategory(long categoryId) {
     AppUtils.setHeaders(response());
 
-    Account account = Account.getById(accountId);
-    account.delete();
+    Category category = Category.getById(categoryId);
+    category.delete();
 
     return Results.ok(AppUtils.okJsonResponse());
   }

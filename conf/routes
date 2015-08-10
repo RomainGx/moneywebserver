@@ -27,6 +27,18 @@ DELETE         /bankOperations/:accountId/:operationId        controllers.BankOp
 GET            /chargeCategories                              controllers.Categories.getChargeCategories()
 GET            /creditCategories                              controllers.Categories.getCreditCategories()
 
+# Accès et modifs d'une catégorie
+POST           /categories                                    controllers.Categories.addCategory()
+GET            /categories/:categoryId                        controllers.Categories.getCategory(categoryId: Long)
+PUT            /categories/:categoryId                        controllers.Categories.editCategory(categoryId: Long)
+DELETE         /categories/:categoryId                        controllers.Categories.deleteCategory(categoryId: Long)
+
+# Accès et modifs d'une sous-catégorie
+POST           /subCategories                                 controllers.SubCategories.addSubCategory()
+GET            /subCategories/:subCategoryId                  controllers.SubCategories.editSubCategory(subCategoryId: Long)
+PUT            /subCategories/:subCategoryId                  controllers.SubCategories.editSubCategory(subCategoryId: Long)
+DELETE         /subCategories/:subCategoryId                  controllers.SubCategories.deleteSubCategory(subCategoryId: Long)
+
 # Liste des tiers
 GET            /thirdParties                                  controllers.ThirdParties.getThirdParties()
 
@@ -40,6 +52,8 @@ DELETE         /thirdParties/:thirdPartyId                    controllers.ThirdP
 OPTIONS        /accounts                                      controllers.Application.onOptionsPreflight()
 OPTIONS        /bankOperations/:accountId                     controllers.Application.onOptionsPreflightWithObjects(accountId: Long)
 OPTIONS        /thirdParties                                  controllers.Application.onOptionsPreflight()
+OPTIONS        /categories                                    controllers.Application.onOptionsPreflight()
+OPTIONS        /subCategories                                 controllers.Application.onOptionsPreflight()
 
 
 # Map static resources from the /public folder to the /assets URL path

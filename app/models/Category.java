@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -13,7 +14,6 @@ import java.util.List;
 
 @Entity
 public class Category extends Model {
-  public enum Type { CHARGE, CREDIT };
   public static Model.Finder<String, Category> find = new Model.Finder<>(String.class, Category.class);
 
   @Id
@@ -26,7 +26,7 @@ public class Category extends Model {
   public String name;
 
   @Constraints.Required
-  public Type type;
+  public CategoryType type;
 
   @OneToMany(mappedBy = "category")
   public List<SubCategory> subCategories;
@@ -36,7 +36,7 @@ public class Category extends Model {
     return Category.find.all();
   }
 
-  public static List<Category> getAll(Type type) {
+  public static List<Category> getAll(CategoryType type) {
     return Category.find.where().eq("type", type).findList();
   }
 

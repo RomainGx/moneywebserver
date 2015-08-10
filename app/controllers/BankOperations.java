@@ -35,7 +35,7 @@ public class BankOperations extends Controller {
       bankOperation.account = account;
       bankOperation.save();
 
-      return Results.ok(AppUtils.okJsonResponse());
+      return Results.ok(Json.toJson(bankOperation));
     }
     catch (Exception e) {
       e.printStackTrace();

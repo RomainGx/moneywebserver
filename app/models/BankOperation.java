@@ -66,6 +66,6 @@ public class BankOperation extends Model {
   }
 
   public static List<BankOperation> getByAccountId(long accountId) {
-    return BankOperation.find.where().eq("account.id", accountId).findList();
+    return BankOperation.find.where().eq("account.id", accountId).orderBy("operationDate ASC, id ASC").findList();
   }
 }

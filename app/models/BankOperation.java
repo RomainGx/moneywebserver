@@ -61,6 +61,9 @@ public class BankOperation extends Model {
     balanceState = BalanceState.NOT_BALANCED;
   }
 
+  /**
+   * @return Montant de l'operation (negatif si c'est une charge, positif si c'est un credit).
+   */
   public Double getAmount() {
     return charge != null ? -charge : credit;
   }

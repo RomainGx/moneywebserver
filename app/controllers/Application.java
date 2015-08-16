@@ -23,7 +23,12 @@ public class Application extends Controller {
     return ok();
   }
 
-  public static Result onOptionsPreflightWithObjects(Long o) {
+  public static Result onOptionsPreflightWithObject(Long unused) {
+    AppUtils.setHeaders(response());
+    return ok();
+  }
+
+  public static Result onOptionsPreflightWith2Objects(Long unused, Long unused2) {
     AppUtils.setHeaders(response());
     return ok();
   }

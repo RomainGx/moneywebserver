@@ -14,8 +14,8 @@
           <value>
             <ProjectSettingsEntry>
               <option name="version" value="2.3.8" />
-              <option name="sourceDir" value="C:\Users\Romain\Documents\workspace\MoneyWeb\app" />
-              <option name="confDir" value="C:\Users\Romain\Documents\workspace\MoneyWeb\conf" />
+              <option name="sourceDir" value="C:\Users\Romain\Documents\workspace\MoneyWeb\conf" />
+              <option name="confDir" value="C:\Users\Romain\Documents\workspace\MoneyWeb\app" />
               <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar" />
               <option name="templateImports">
                 <list>

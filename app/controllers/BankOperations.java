@@ -2,6 +2,7 @@ package controllers;
 
 import models.Account;
 import models.BankOperation;
+import models.CategoryType;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -48,14 +49,21 @@ public class BankOperations extends Controller {
 
     try {
       Account account = Account.getById(accountId);
-      BankOperation bankOperation = BankOperation.getById(operationId);
+      BankOperation oldBankOperation = BankOperation.getById(operationId);
+      BankOperation bankOperation = Form.form(BankOperation.class).bindFromRequest().get();
 
-      BankOperation bankOperationForm = Form.form(BankOperation.class).bindFromRequest().get();
-      // TODO Modifier bankOperation avec bankOperationForm
-      bankOperation.account = account;
-      bankOperation.update();
+      if (account.id == bankOperation.account.id) {
+        account.finalBalance += bankOperation.getAmount() - oldBankOperation.getAmount();
+        // Modification du solde dans l'objet car il est retourne au client
+        bankOperation.account.finalBalance = account.finalBalance;
+        bankOperation.update(operationId);
+        account.update(accountId);
 
-      return Results.ok(AppUtils.okJsonResponse());
+        return Results.ok(Json.toJson(bankOperation));
+      }
+      else {
+        return Results.badRequest("Bank operation does not match with account");
+      }
     }
     catch (Exception e) {
       e.printStackTrace();

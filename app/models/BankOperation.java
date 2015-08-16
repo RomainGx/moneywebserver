@@ -61,6 +61,10 @@ public class BankOperation extends Model {
     balanceState = BalanceState.NOT_BALANCED;
   }
 
+  public Double getAmount() {
+    return charge != null ? -charge : credit;
+  }
+
   public static BankOperation getById(long operationId) {
     return Ebean.find(BankOperation.class, operationId);
   }

@@ -3,60 +3,62 @@
 # ~~~~
 
 # Home page
-GET            /                                              controllers.Application.index()
+GET            /                                                       controllers.Application.index()
 
 # Liste de comptes
-GET            /accounts                                      controllers.Accounts.getAccounts()
+GET            /accounts                                               controllers.Accounts.getAccounts()
 
 # Accès et modifs à un compte
-POST           /accounts                                      controllers.Accounts.addAccount()
-GET            /accounts/:accountId                           controllers.Accounts.getAccount(accountId: Long)
-PUT            /accounts/:accountId                           controllers.Accounts.editAccount(accountId: Long)
-DELETE         /accounts/:accountId                           controllers.Accounts.deleteAccount(accountId: Long)
+POST           /accounts                                               controllers.Accounts.addAccount()
+GET            /accounts/:accountId                                    controllers.Accounts.getAccount(accountId: Long)
+PUT            /accounts/:accountId                                    controllers.Accounts.editAccount(accountId: Long)
+DELETE         /accounts/:accountId                                    controllers.Accounts.deleteAccount(accountId: Long)
 
 # Liste d'opérations d'un compte
-GET            /bankOperations/:accountId                     controllers.BankOperations.getBankOperations(accountId: Long)
+GET            /accounts/:accountId/bankOperations                     controllers.BankOperations.getBankOperations(accountId: Long)
 
 # Accès et modifs d'une opération
-POST           /bankOperations/:accountId                     controllers.BankOperations.addBankOperation(accountId: Long)
-GET            /bankOperations/:accountId/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
-PUT            /bankOperations/:accountId/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
-DELETE         /bankOperations/:accountId/:operationId        controllers.BankOperations.deleteBankOperation(accountId: Long, operationId: Long)
+POST           /accounts/:accountId/bankOperations                     controllers.BankOperations.addBankOperation(accountId: Long)
+GET            /accounts/:accountId/bankOperations/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
+PUT            /accounts/:accountId/bankOperations/:operationId        controllers.BankOperations.editBankOperation(accountId: Long, operationId: Long)
+DELETE         /accounts/:accountId/bankOperations/:operationId        controllers.BankOperations.deleteBankOperation(accountId: Long, operationId: Long)
 
 # Liste des catégories
-GET            /chargeCategories                              controllers.Categories.getChargeCategories()
-GET            /creditCategories                              controllers.Categories.getCreditCategories()
+GET            /chargeCategories                                       controllers.Categories.getChargeCategories()
+GET            /creditCategories                                       controllers.Categories.getCreditCategories()
 
 # Accès et modifs d'une catégorie
-POST           /categories                                    controllers.Categories.addCategory()
-GET            /categories/:categoryId                        controllers.Categories.getCategory(categoryId: Long)
-PUT            /categories/:categoryId                        controllers.Categories.editCategory(categoryId: Long)
-DELETE         /categories/:categoryId                        controllers.Categories.deleteCategory(categoryId: Long)
+POST           /categories                                             controllers.Categories.addCategory()
+GET            /categories/:categoryId                                 controllers.Categories.getCategory(categoryId: Long)
+PUT            /categories/:categoryId                                 controllers.Categories.editCategory(categoryId: Long)
+DELETE         /categories/:categoryId                                 controllers.Categories.deleteCategory(categoryId: Long)
 
 # Accès et modifs d'une sous-catégorie
-POST           /subCategories                                 controllers.SubCategories.addSubCategory()
-GET            /subCategories/:subCategoryId                  controllers.SubCategories.editSubCategory(subCategoryId: Long)
-PUT            /subCategories/:subCategoryId                  controllers.SubCategories.editSubCategory(subCategoryId: Long)
-DELETE         /subCategories/:subCategoryId                  controllers.SubCategories.deleteSubCategory(subCategoryId: Long)
+POST           /subCategories                                          controllers.SubCategories.addSubCategory()
+GET            /subCategories/:subCategoryId                           controllers.SubCategories.editSubCategory(subCategoryId: Long)
+PUT            /subCategories/:subCategoryId                           controllers.SubCategories.editSubCategory(subCategoryId: Long)
+DELETE         /subCategories/:subCategoryId                           controllers.SubCategories.deleteSubCategory(subCategoryId: Long)
 
 # Liste des tiers
-GET            /thirdParties                                  controllers.ThirdParties.getThirdParties()
+GET            /thirdParties                                           controllers.ThirdParties.getThirdParties()
 
 # Accès et modifs à un tiers
-POST           /thirdParties                                  controllers.ThirdParties.addThirdParty()
-GET            /thirdParties/:thirdPartyId                    controllers.ThirdParties.getThirdParty(thirdPartyId: Long)
-PUT            /thirdParties/:thirdPartyId                    controllers.ThirdParties.editThirdParty(thirdPartyId: Long)
-DELETE         /thirdParties/:thirdPartyId                    controllers.ThirdParties.deleteThirdParty(thirdPartyId: Long)
+POST           /thirdParties                                           controllers.ThirdParties.addThirdParty()
+GET            /thirdParties/:thirdPartyId                             controllers.ThirdParties.getThirdParty(thirdPartyId: Long)
+PUT            /thirdParties/:thirdPartyId                             controllers.ThirdParties.editThirdParty(thirdPartyId: Long)
+DELETE         /thirdParties/:thirdPartyId                             controllers.ThirdParties.deleteThirdParty(thirdPartyId: Long)
 
 # Preflight Cross Origins
-OPTIONS        /accounts                                      controllers.Application.onOptionsPreflight()
-OPTIONS        /bankOperations/:accountId                     controllers.Application.onOptionsPreflightWithObjects(accountId: Long)
-OPTIONS        /thirdParties                                  controllers.Application.onOptionsPreflight()
-OPTIONS        /categories                                    controllers.Application.onOptionsPreflight()
-OPTIONS        /subCategories                                 controllers.Application.onOptionsPreflight()
+OPTIONS        /accounts                                               controllers.Application.onOptionsPreflight()
+OPTIONS        /accounts/:accountId                                    controllers.Application.onOptionsPreflightWithObject(accountId: Long)
+OPTIONS        /accounts/:accountId/bankOperations                     controllers.Application.onOptionsPreflightWithObject(accountId: Long)
+OPTIONS        /accounts/:accountId/bankOperations/:operationId        controllers.Application.onOptionsPreflightWith2Objects(accountId: Long, operationId: Long)
+OPTIONS        /thirdParties                                           controllers.Application.onOptionsPreflight()
+OPTIONS        /categories                                             controllers.Application.onOptionsPreflight()
+OPTIONS        /subCategories                                          controllers.Application.onOptionsPreflight()
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET            /assets/*file                                  controllers.Assets.at(path="/public", file)
+GET            /assets/*file                                           controllers.Assets.at(path="/public", file)
 
     

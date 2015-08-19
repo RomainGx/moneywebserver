@@ -5,6 +5,9 @@
 # Home page
 GET            /                                                       controllers.Application.index()
 
+GET            /import                                                 controllers.Importation.index()
+POST           /upload                                                 controllers.Importation.upload()
+
 # Liste de comptes
 GET            /accounts                                               controllers.Accounts.getAccounts()
 

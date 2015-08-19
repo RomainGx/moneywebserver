@@ -1,0 +1,11 @@
+@import helper.form;
+
+@form(action = routes.Importation.upload, 'enctype -> "multipart/form-data") {
+
+    <input type="file" name="moneyFile">
+
+    <p>
+        <input type="submit"/>
+    </p>
+
+}

@@ -38,20 +38,16 @@ public class Categories extends Controller {
   public static Result editCategory(long categoryId) {
     AppUtils.setHeaders(response());
 
-    if (categoryId == 0) {
-      try {
-        Category category = Form.form(Category.class).bindFromRequest().get();
-        category.save();
+    try {
+      Category category = Form.form(Category.class).bindFromRequest().get();
+      category.update();
 
-        return Results.ok(AppUtils.okJsonResponse());
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-        return Results.internalServerError(AppUtils.errorJsonResponse(e.getMessage()));
-      }
+      return Results.ok(Json.toJson(category));
     }
-
-    return Results.ok(AppUtils.okJsonResponse());
+    catch (Exception e) {
+      e.printStackTrace();
+      return Results.internalServerError(AppUtils.errorJsonResponse(e.getMessage()));
+    }
   }
 
   public static Result addCategory() {

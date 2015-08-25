@@ -27,14 +27,12 @@ public class BankOperations extends Controller {
 
     try {
       Account account = Account.getById(accountId);
-      Http.RequestBody b = request().body();
 
-      Map<String, String[]> m = request().body().asFormUrlEncoded();
-
-      Form<BankOperation> f = Form.form(BankOperation.class).bindFromRequest();
-      BankOperation bankOperation = f.get();
+      BankOperation bankOperation = Form.form(BankOperation.class).bindFromRequest().get();
+      account.finalBalance += bankOperation.getAmount();
       bankOperation.account = account;
       bankOperation.save();
+      account.update(accountId);
 
       return Results.ok(Json.toJson(bankOperation));
     }

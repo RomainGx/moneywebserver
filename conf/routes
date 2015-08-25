@@ -37,10 +37,10 @@ PUT            /categories/:categoryId                                 controlle
 DELETE         /categories/:categoryId                                 controllers.Categories.deleteCategory(categoryId: Long)
 
 # Accès et modifs d'une sous-catégorie
-POST           /subCategories                                          controllers.SubCategories.addSubCategory()
-GET            /subCategories/:subCategoryId                           controllers.SubCategories.editSubCategory(subCategoryId: Long)
-PUT            /subCategories/:subCategoryId                           controllers.SubCategories.editSubCategory(subCategoryId: Long)
-DELETE         /subCategories/:subCategoryId                           controllers.SubCategories.deleteSubCategory(subCategoryId: Long)
+POST           /categories/:categoryId/subCategories                   controllers.SubCategories.addSubCategory(categoryId: Long)
+GET            /categories/:categoryId/subCategories/:subCategoryId    controllers.SubCategories.getSubCategory(categoryId: Long, subCategoryId: Long)
+PUT            /categories/:categoryId/subCategories/:subCategoryId    controllers.SubCategories.editSubCategory(categoryId: Long, subCategoryId: Long)
+DELETE         /categories/:categoryId/subCategories/:subCategoryId    controllers.SubCategories.deleteSubCategory(categoryId: Long, subCategoryId: Long)
 
 # Liste des tiers
 GET            /thirdParties                                           controllers.ThirdParties.getThirdParties()
@@ -58,7 +58,9 @@ OPTIONS        /accounts/:accountId/bankOperations                     controlle
 OPTIONS        /accounts/:accountId/bankOperations/:operationId        controllers.Application.onOptionsPreflightWith2Objects(accountId: Long, operationId: Long)
 OPTIONS        /thirdParties                                           controllers.Application.onOptionsPreflight()
 OPTIONS        /categories                                             controllers.Application.onOptionsPreflight()
-OPTIONS        /subCategories                                          controllers.Application.onOptionsPreflight()
+OPTIONS        /categories/:categoryId                                 controllers.Application.onOptionsPreflightWithObject(categoryId: Long)
+OPTIONS        /categories/:categoryId/subCategories                   controllers.Application.onOptionsPreflightWithObject(categoryId: Long)
+OPTIONS        /categories/:categoryId/subCategories/:subCategoryId    controllers.Application.onOptionsPreflightWith2Objects(categoryId: Long, subCategoryId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import models.Account;
 import models.BankOperation;
 import models.Category;
@@ -31,16 +32,34 @@ public class SubCategories extends Controller {
 
   public static Result editSubCategory(long categoryId, long subCategoryId) {
     AppUtils.setHeaders(response());
+    boolean isMoving = request().queryString().containsKey("move");
+
+    Ebean.beginTransaction();
 
     try {
       SubCategory subCategory = Form.form(SubCategory.class).bindFromRequest().get();
       subCategory.update();
 
+      // Si la categorie a ete deplacee, on met a jour toutes les operations concernees
+      if (isMoving) {
+        List<BankOperation> bankOperations = BankOperation.getBySubCategoryId(categoryId, subCategoryId);
+        for (BankOperation bankOperation : bankOperations) {
+          bankOperation.category = subCategory.category;
+          bankOperation.update();
+        }
+      }
+
+      Ebean.commitTransaction();
+
       return Results.ok(Json.toJson(subCategory));
     }
     catch (Exception e) {
+      Ebean.rollbackTransaction();
       e.printStackTrace();
       return Results.internalServerError(AppUtils.errorJsonResponse(e.getMessage()));
+    }
+    finally {
+      Ebean.endTransaction();
     }
   }
 

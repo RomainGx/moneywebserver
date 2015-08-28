@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Account;
+import models.BankOperation;
 import models.Category;
 import models.CategoryType;
 import play.data.Form;
@@ -19,6 +20,13 @@ public class Categories extends Controller {
 
   public static Result getCreditCategories() {
     return getCategories(CategoryType.CREDIT);
+  }
+
+  public static Result getBankOperations(long categoryId) {
+    AppUtils.setHeaders(response());
+
+    List<BankOperation> bankOperations = BankOperation.getByCategoryId(categoryId);
+    return Results.ok(Json.toJson(bankOperations));
   }
 
   private static Result getCategories(CategoryType categoryType) {

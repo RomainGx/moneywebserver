@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Account;
+import models.BankOperation;
 import models.Category;
 import models.CategoryType;
 import models.SubCategory;
@@ -19,6 +20,13 @@ public class SubCategories extends Controller {
 
     SubCategory subCategory = SubCategory.getById(subCategoryId);
     return Results.ok(Json.toJson(subCategory));
+  }
+
+  public static Result getBankOperations(long categoryId, long subCategoryId) {
+    AppUtils.setHeaders(response());
+
+    List<BankOperation> bankOperations = BankOperation.getBySubCategoryId(categoryId, subCategoryId);
+    return Results.ok(Json.toJson(bankOperations));
   }
 
   public static Result editSubCategory(long categoryId, long subCategoryId) {
